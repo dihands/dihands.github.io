@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Website</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Welcome to My Website</h1>
+		<nav>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section>
+			<h2>About Us</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</section>
+		<section>
+			<h2>Our Services</h2>
+			<ul>
+				<li>Service 1</li>
+				<li>Service 2</li>
+				<li>Service 3</li>
+			</ul>
+		</section>
+	</main>
+	<footer>
+		<p>&copy; 2023 My Website</p>
+	</footer>
+</body>
+</html>
+
+
+
+
+/* Global Styles */
+body {
+	font-family: Arial, sans-serif;
+	color: #333;
+	background-color: #f7f7f7;
+	margin: 0;
+	padding: 0;
+}
+
+/* Header Styles */
+header {
+	background-color: #fff;
+	padding: 20px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+	margin: 0;
+	font-size: 32px;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+nav li {
+	display: inline-block;
+	margin-right: 20px;
+}
+
+nav li:last-child {
+	margin-right: 0;
+}
+
+nav a {
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
+}
+
+nav a:hover {
+	color: #ff6600;
+}
+
+/* Main Styles */
+main {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+section {
+	margin-bottom: 40px;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+/* Footer Styles */
+footer {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+}
+
+
+// Display a welcome message
+alert("Welcome to My Website!");
+
+// Show/hide navigation menu on small screens
+var menu = document.querySelector("nav ul");
+var toggle = document.querySelector(".menu-toggle");
+
+toggle.addEventListener("click", function() {
+	if (menu.classList.contains("show")) {
+		menu.classList.remove("show");
+	} else {
+		menu.classList.add("show");
+	}
+});
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+	return render_template("home.html")
+
+@app.route("/about")
+def about():
+	return render_template("about.html")
+
+@app.route("/services
+
+
+
+
+
