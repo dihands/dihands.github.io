@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Social Media Platform</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Messages</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="new-post">
+        <h2>New Post</h2>
+        <form>
+          <textarea placeholder="What's on your mind?"></textarea>
+          <button type="submit">Post</button>
+        </form>
+      </section>
+      <section id="posts">
+        <h2>Recent Posts</h2>
+        <div class="post">
+          <h3>John Doe</h3>
+          <p>This is my first post!</p>
+          <div class="post-actions">
+            <span class="likes">5 likes</span>
+            <span class="comments">3 comments</span>
+          </div>
+        </div>
+        <div class="post">
+          <h3>Jane Smith</h3>
+          <p>Here's a photo I took yesterday</p>
+          <img src="photo.jpg" alt="Jane's photo">
+          <div class="post-actions">
+            <span class="likes">10 likes</span>
+            <span class="comments">2 comments</span>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2023 My Social Media Platform</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+<style>
+
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+#new-post {
+  width: 30%;
+}
+
+#new-post form {
+  display: flex;
+  flex-direction: column;
+}
+
+#new-post textarea {
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+#posts {
+  width: 60%;
+}
+
+.post {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f7f7f7;
+}
+
+.post h3 {
+  margin-top: 0;
+}
+
+.post img {
+  max-width: 100%;
+}
+
+.post-actions {
+  margin-top: 10px;
+}
+
+.post-actions span {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+
+
+</style>
+
+
+
+<script>
+
+// Add functionality to the post form
+const postForm = document.querySelector('#new-post form');
+const postsContainer = document.querySelector('#posts');
+
+postForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Create a new post element
+  const postElement = document.createElement('div');
+  postElement.classList.add('post');
+
+  // Get the text from the textarea and create a new paragraph element
+  const text = postForm.querySelector('textarea').value;
+  const textElement = document.createElement('p');
+  textElement.textContent = text;
+
+  // Add the text element to the post element
+  postElement.appendChild(textElement);
+
+  // Add the post element to the posts container
+  postsContainer.appendChild(postElement);
+
+  // Clear the textarea
+  postForm.querySelector('textarea').value = '';
+});
+
+// Add functionality to the like and comment buttons
+const postElements = document.querySelectorAll('.post');
+
+postElements.forEach((postElement) => {
+  const likesElement = postElement.querySelector('.likes');
+  const commentsElement = postElement.querySelector('.comments');
+
+  // Set up the initial like and comment counts
+  let likeCount = parseInt(likesElement.textContent);
+  let commentCount = parseInt(commentsElement.textContent);
+
+  // Add functionality to the like button
+  const likeButton = postElement.querySelector('.like-button');
+  likeButton.addEventListener('click', () => {
+    likeCount++;
+    likesElement.textContent = `${likeCount} likes`;
+  });
+
+  // Add functionality to the comment button
+  const commentButton = postElement.querySelector('.comment-button');
+  commentButton.addEventListener('click', () => {
+    commentCount++;
+    commentsElement.textContent = `${commentCount} comments`;
+  });
+});
+
+
+</script>
