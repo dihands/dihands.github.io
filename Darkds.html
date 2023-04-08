@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dark DS</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Messages</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      
+     
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+<style>
+
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dark DS</title>
+	<style>
+		textarea {
+			width: 50%;
+			height: 100px;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			resize: none;
+		}
+		button {
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+        .post {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .post h2 {
+            margin-top: 0;
+        }
+	</style>
+</head>
+<body>
+	<h1></h1>
+	<form>
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required>
+		<br>
+		<label for="content">Content:</label>
+		<br>
+		<textarea id="content" name="content" placeholder="What's on your mind?" required></textarea>
+		<button type="submit" id="submit-btn">Post</button>
+	</form>
+	<div id="post-container"></div>
+	<script src="app.js"></script>
+</body>
+</html>
+
+<style>
+
+textarea {
+	width: 50%;
+	height: 100px;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	resize: none;
+}
+
+button {
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.post {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.post h2 {
+    margin-top: 0;
+}
+
+
+</style>
+
+<script>
+
+const form = document.querySelector('form');
+const postContainer = document.querySelector('#post-container');
+
+// Add event listener to form
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nameInput = document.querySelector('#name');
+    const contentInput = document.querySelector('#content');
+
+    const name = nameInput.value.trim();
+    const content = contentInput.value.trim();
+
+    // Check if name and content are provided
+    if (!name || !content) {
+        alert('Please enter a name and content');
+        return;
+    }
+
+    // Create post element and add to DOM
+    const post = document.createElement('div');
+    post.classList.add('post');
+    post.innerHTML = `
+        <h2>${name}</h2>
+        <p>${content}</p>
+    `;
+    postContainer.appendChild(post);
+
+    // Save post to local storage
+    savePost(name, content);
+
+    // Clear input fields
+    nameInput.value = '';
+    contentInput.value = '';
+});
+
+// Save post to local storage
+function savePost(name, content) {
+    let posts = JSON.parse(localStorage.getItem('posts')) || [];
+    const newPost = {name: name, content: content, date: new Date()};
+    posts.push(newPost);
+    localStorage.setItem('posts', JSON.stringify(posts));
+
+    // Add post to recent posts list
+    addRecentPost(newPost);
+}
+
+// Load posts from local storage
+function loadPosts() {
+    let posts = JSON.parse(localStorage.getItem('posts')) || [];
+    posts.sort((a, b) => b.date - a.date);
+    posts.forEach(post => {
+        const newPost = document.createElement('div');
+        newPost.classList.add('post');
+        newPost.innerHTML = `
+            <h2>${post.name}</h2>
+            <p>${post.content}</p>
+        `;
+        postContainer.appendChild(newPost);
+    });
+}
+
+// Add post to recent posts list
+function addRecentPost(post) {
+    const recentPostsContainer = document.querySelector('#recent-posts');
+    const newRecentPost = document.createElement('li');
+    newRecentPost.innerHTML = `<a href="#">${post.name}</a>`;
+    recentPostsContainer.appendChild(newRecentPost);
+    recentPostsContainer.style.display = 'block';
+}
+
+// Load recent posts from local storage
+function loadRecentPosts() {
+    let posts = JSON.parse(localStorage.getItem('posts')) || [];
+    posts.sort((a, b) => b.date - a.date);
+    const recentPostsContainer = document.querySelector('#recent-posts');
+    posts.slice(0, 5).forEach(post => {
+        const newRecentPost = document.createElement('li');
+        newRecentPost.innerHTML = `<a href="#">${post.name}</a>`;
+        recentPostsContainer.appendChild(newRecentPost);
+    });
+    if (posts.length > 0) {
+        recentPostsContainer.style.display = 'block';
+    }
+}
+
+// Load posts and recent posts on page load
+loadPosts();
+loadRecentPosts();
+
+
+</script>
+
+
+
+
+

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Social Network</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>My Social Network</h1>
+      <form id="post-form">
+        <label for="post-text">Write something:</label>
+        <textarea id="post-text"></textarea>
+        <label for="post-image">Upload an image:</label>
+        <input type="file" id="post-image">
+        <button type="submit">Post</button>
+      </form>
+      <div id="post-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+<style>
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+textarea {
+  height: 100px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.post {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.post img {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.post .actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.post .actions button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+</style>
+
+
+<script>
+updatePostInDOM(postElement, post);
+});
+
+// Load posts from local storage when the page loads
+loadPostsFromStorage();
+
+// Function to add a post to the DOM and local storage
+function addPostToDOM(post) {
+// Generate a unique ID for the post
+const postId = Date.now().toString();
+
+// Add the post to local storage
+localStorage.setItem(postId, JSON.stringify(post));
+
+// Create a new post element
+const postElement = document.createElement('div');
+postElement.classList.add('post');
+postElement.dataset.id = postId;
+
+// Add the post text
+const postTextElement = document.createElement('p');
+postTextElement.textContent = post.text;
+postElement.appendChild(postTextElement);
+
+// Add the post image if there is one
+if (post.image) {
+const postImageElement = document.createElement('img');
+postImageElement.src = post.image;
+postElement.appendChild(postImageElement);
+}
+
+// Add the post actions (like and comment buttons)
+const postActionsElement = document.createElement('div');
+postActionsElement.classList.add('actions');
+const likeButtonElement = document.createElement('button');
+likeButtonElement.dataset.action = 'like';
+likeButtonElement.textContent = Like (${post.likes});
+const commentButtonElement = document.createElement('button');
+commentButtonElement.dataset.action = 'comment';
+commentButtonElement.textContent = Comment (${post.comments.length});
+postActionsElement.appendChild(likeButtonElement);
+postActionsElement.appendChild(commentButtonElement);
+postElement.appendChild(postActionsElement);
+
+// Add the post to the container
+postContainer.prepend(postElement);
+}
+
+// Function to update a post in the DOM
+function updatePostInDOM(postElement, post) {
+// Update the like button text
+const likeButtonElement = postElement.querySelector('[data-action="like"]');
+likeButtonElement.textContent = Like (${post.likes});
+
+// Update the comment button text
+const commentButtonElement = postElement.querySelector('[data-action="comment"]');
+commentButtonElement.textContent = Comment (${post.comments.length});
+}
+
+// Function to load posts from local storage and add them to the DOM
+function loadPostsFromStorage() {
+for (let i = 0; i < localStorage.length; i++) {
+const key = localStorage.key(i);
+if (key.startsWith('post-')) {
+const post = JSON.parse(localStorage.getItem(key));
+addPostToDOM(post);
+}
+}
+}
+
+</script>
