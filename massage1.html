@@ -1,0 +1,279 @@
+
+
+<button id="toggle-mode">Switch Mode</button>
+
+<!-- Your website content here -->
+<style>
+body {
+  background-color: #00FF00 ;
+  color: #333;
+}
+
+.dark-mode {
+  background-color: #00FF00 ;
+  color: #00FF00 ;
+}
+</style>
+<script>
+
+const toggleButton = document.getElementById('toggle-mode');
+const bodyElement = document.body;
+
+toggleButton.addEventListener('click', () => {
+  bodyElement.classList.toggle('dark-mode');
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="message-app">
+  <div class="message-form">
+  <center>
+    <h1>Dihan khan</h1>
+    <h2>Dark DS </h2>
+    <h3> Send Massage</h3>
+    </center>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit" id="send-btn">Send</button>
+    </form>
+  </div>
+
+  <div class="message-list">
+    <h2>Message List</h2>
+    <ul id="message-ul"></ul>
+  </div>
+</div>
+
+<style>
+.message-app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.message-form, .message-list {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.message-form {
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+
+.message-form h2, .message-list h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.message-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-form label {
+  margin-top: 10px;
+}
+
+.message-form textarea {
+  height: 150px;
+}
+
+.message-form button {
+  margin-top: 10px;
+}
+
+.message-list {
+  background-color: #f2f2f2;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+
+#message-ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.message-li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.message-li p {
+  margin: 0;
+}
+
+.message-li small {
+  font-style: italic;
+}
+
+</style>
+
+<script>
+
+// Get form elements
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const messageInput = document.getElementById('message');
+const sendBtn = document.getElementById('send-btn');
+const messageUl = document.getElementById('message-ul');
+
+// Add event listeners
+sendBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  sendMessage();
+});
+
+// Send message function
+function sendMessage() {
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const message = messageInput.value.trim();
+
+  // Validate name, email, and message inputs
+  if (!validateName(name)) {
+    alert('Please enter a valid name');
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    alert('Please enter a valid email address');
+    return;
+  }
+
+  if (!validateMessage(message)) {
+    alert('Message cannot be empty');
+    return;
+  }
+
+  // Create message object
+  const timestamp = new Date().getTime();
+  const messageObj = { name, email, message, timestamp };
+
+  // Save message to local storage
+  const messages = JSON.parse(localStorage.getItem('messages')) || [];
+  messages.push(messageObj);
+  localStorage.setItem('messages', JSON.stringify(messages));
+
+  // Display message in list
+  const messageLi = document.createElement('li');
+  messageLi.className = 'message-li';
+  messageLi.innerHTML = `
+    <p><strong>${name}:</strong> ${message}</p>
+    <small>${formatTimestamp(timestamp)}</small>
+  `;
+  messageUl.appendChild(messageLi);
+
+  // Clear form inputs
+  nameInput.value = '';
+  emailInput.value = '';
+  messageInput.value = '';
+}
+
+// Validate name function
+function validateName(name) {
+  return /^[a-zA-Z ]+$/.test(name);
+}
+
+// Validate email function
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Validate message function
+function validateMessage(message) {
+  return message.length > 0;
+}
+
+// Format timestamp function
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  const month = date.toLocaleString('default', { month: 'short' });
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'pm' : 'am';
+  const formattedTime = `${hours % 12 || 12}:${minutes}${ampm}`;
+  return `${month} ${day}, ${year} ${formattedTime}`;
+}
+
+// Load messages from local storage on page load
+window.addEventListener('load', () => {
+  const messages = JSON.parse(localStorage.getItem('messages')) || [];
+  messages.forEach((message) => {
+    const messageLi = document.createElement('li');
+    messageLi.className = 'message-li';
+    messageLi.innerHTML = `
+      <p><strong>${message.name}:</strong> ${message.message}</p>
+      <small>${formatTimestamp(message.timestamp)}</small>
+    `;
+    messageUl.appendChild(messageLi);
+  });
+});
+
+</script>
