@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dark DN</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+ 
+    <div class="calculator">
+      <div class="screen">
+        <div class="expression"></div>
+        <div class="result"></div>
+      </div>
+      <div class="buttons">
+        <button class="button clear">C</button>
+        <button class="button">sin</button>
+        <button class="button">cos</button>
+        <button class="button">tan</button>
+        <button class="button">log</button>
+        <button class="button">sqrt</button>
+        <button class="button">(</button>
+        <button class="button">)</button>
+        <button class="button">7</button>
+        <button class="button">8</button>
+        <button class="button">9</button>
+        <button class="button">/</button>
+        <button class="button">4</button>
+        <button class="button">5</button>
+        <button class="button">6</button>
+        <button class="button">*</button>
+        <button class="button">1</button>
+        <button class="button">2</button>
+        <button class="button">3</button>
+        <button class="button">-</button>
+        <button class="button">0</button>
+        <button class="button">.</button>
+        <button class="button equals">=</button>
+        <button class="button">+</button>
+      </div>
+    </div>
+    
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video Background Example</title>
+    <style>
+      /* Set the video container to full screen */
+      #video-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Set the video to cover the container and prevent it from being cropped */
+      #video-background {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Add some overlay text */
+      .overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Video container -->
+    <div id="video-container">
+      <!-- Video background -->
+      <video autoplay muted loop id="video-background">
+        <source src="2495245874.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Overlay text -->
+    <div class="overlay">
+      <h1></h1>
+    </div>
+  </body>
+</html>
+
+
+
