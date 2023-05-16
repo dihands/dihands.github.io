@@ -1,44 +1,23 @@
-.calculator {
-  background-color: #000000;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 50px auto;
-  padding: 10px;
-  width: 300px;
+.road {
+  position: relative;
+  width: 400px;
+  height: 600px;
+  border: 1px solid black;
+  overflow: hidden;
 }
 
-.screen {
-  background-color: #ffffff;
-  border: 5px solid #ccc;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  padding: 15px;
+.car {
+  position: absolute;
+  bottom: 10px;
+  left: 175px;
+  width: 50px;
+  height: 100px;
+  background-color: blue;
 }
 
-.expression {
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.result {
-  font-size: 20px;
-}
-
-.buttons {
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.button {
-  background-color: #808080;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 18px;
-  padding: 5px;
-}
-
-.equals {
-  background-color: #000000;
-  color: #808080;
+.obstacle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: red;
 }
