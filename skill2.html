@@ -1,0 +1,478 @@
+
+ <h1 style="color : Green" > Project 4.  </h1>
+<center>
+<h1 style="color : Green" > Project 3.  </h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <body>
+
+
+	<title>Photo Gallery</title>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+		input[type="file"] {
+			display: none;
+		}
+		.gallery {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			margin-top: 20px;
+		}
+		.gallery img {
+			width: 200px;
+			height: 200px;
+			object-fit: cover;
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Photo Gallery</h1>
+	<input type="file" id="fileInput">
+	<button id="addBtn">Add Photo</button>
+	<div class="gallery"></div>
+
+	<script src="script.js"></script>
+</body>
+</html>
+
+	<style>
+		
+</style>
+
+<script>
+
+
+const fileInput = document.getElementById('fileInput');
+const addBtn = document.getElementById('addBtn');
+const gallery = document.querySelector('.gallery');
+
+// Load saved photos from localStorage
+const savedPhotos = JSON.parse(localStorage.getItem('photos')) || [];
+
+// Add saved photos to the gallery
+for (const photo of savedPhotos) {
+	const img = document.createElement('img');
+	img.src = photo;
+	gallery.appendChild(img);
+}
+
+// Add a new photo when the add button is clicked
+addBtn.addEventListener('click', () => {
+	fileInput.click();
+});
+
+// Handle file input change event
+fileInput.addEventListener('change', () => {
+	const file = fileInput.files[0];
+
+	// Check if a file was selected
+	if (file) {
+		const reader = new FileReader();
+
+		// Read the file data as a data URL
+		reader.readAsDataURL(file);
+
+		// Add the image to the gallery when the file is loaded
+		reader.addEventListener('load', () => {
+			const img = document.createElement('img');
+			img.src = reader.result;
+			gallery.appendChild(img);
+
+			// Save the photos to localStorage
+			const photos = [...savedPhotos, reader.result];
+			localStorage.setItem('photos', JSON.stringify(photos));
+		});
+	}
+});
+  
+
+</script>
+
+</center>
+
+
+ <br> <br> <br> 
+ 
+  <h1 style="color : Green" > Project 5.  </h1>
+  <br> <br> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Database Site</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Personal Database Site</h1>
+  
+  <div class="form-container">
+    <form id="database-form">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title">
+      <label for="data">Data:</label>
+      <textarea id="data" name="data"></textarea>
+      <button type="submit">Add to Database</button>
+    </form>
+  </div>
+  
+  <div class="search-container">
+    <form id="search-form">
+      <label for="search">Search by Title:</label>
+      <input type="text" id="search" name="search">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  
+  <div id="results-container"></div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+    <style>
+      
+      
+      
+      body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+h1 {
+  background-color: #0074D9;
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+}
+
+.form-container {
+  padding: 10px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-container input[type="text"],
+.form-container textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.form-container button {
+  background-color: #0074D9;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-container {
+  padding: 10px;
+}
+
+.search-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.search-container input[type="text"] {
+  width: 80%;
+  padding: 5px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.search-container button {
+  background-color: #0074D9;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#results-container {
+  padding: 10px;
+}
+
+      
+      
+      
+    </style>
+   
+
+   
+   
+	
+	
+	
+	
+
+	
+	<script>
+		
+		
+		// Get the database from local storage or initialize an empty array
+const database = JSON.parse(localStorage.getItem("database")) || [];
+
+// Select the form and input elements
+const databaseForm = document.querySelector("#database-form");
+const titleInput = document.querySelector("#title");
+const dataInput = document.querySelector("#data");
+
+const searchForm = document.querySelector("#search-form");
+const searchInput = document.querySelector("#search");
+
+const resultsContainer = document.querySelector("#results-container");
+
+// Function to add a new entry to the database
+function addToDatabase(title, data) {
+  // Check if the title already exists in the database
+  const index = database.findIndex(entry => entry.title === title);
+
+  if (index === -1) {
+    // If the title does not exist, add a new entry to the database
+    database.push({ title, data });
+    localStorage.setItem("database", JSON.stringify(database));
+    return true;
+  } else {
+    // If the title already exists, return false
+    return false;
+  }
+}
+
+// Event listener for the database form submit
+databaseForm.addEventListener("submit", e => {
+  e.preventDefault();
+  
+  const title = titleInput.value.trim();
+  const data = dataInput.value.trim();
+  
+  if (title && data) {
+    // If both the title and data inputs have a value, add to the database
+    const added = addToDatabase(title, data);
+    if (added) {
+      // If the entry was added successfully, clear the input fields and display a success message
+      titleInput.value = "";
+      dataInput.value = "";
+      alert("Entry added to database.");
+    } else {
+      // If the title already exists, display an error message
+      alert("Title already exists in database.");
+    }
+  } else {
+    // If either the title or data input is empty, display an error message
+    alert("Please enter a title and data.");
+  }
+});
+
+// Function to search the database by title
+function searchByTitle(title) {
+  // Filter the database to find entries with matching titles
+  const results = database.filter(entry => entry.title.toLowerCase().includes(title.toLowerCase()));
+  return results;
+}
+
+// Function to display search results
+function displayResults(results) {
+  // Clear any previous results
+  resultsContainer.innerHTML = "";
+
+  if (results.length === 0) {
+    // If there are no results, display a message
+    resultsContainer.textContent = "No results found.";
+  } else {
+    // If there are results, create a table and display them
+    const table = document.createElement("table");
+    const headerRow = table.insertRow();
+    const titleHeader = headerRow.insertCell();
+    const dataHeader = headerRow.insertCell();
+    titleHeader.textContent = "";
+    
+    dataHeader.textContent = "";
+
+    results.forEach(entry => {
+      const row = table.insertRow();
+      const titleCell = row.insertCell();
+      const dataCell = row.insertCell();
+     
+      dataCell.textContent = entry.data;
+    });
+
+    resultsContainer.appendChild(table);
+  }
+}
+
+// Event listener for the search form submit
+searchForm.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const searchTerm = searchInput.value.trim();
+
+  if (searchTerm) {
+    // If the search input has a value, search the database and display the results
+    const results = searchByTitle(searchTerm);
+    displayResults(results);
+  } else {
+    // If the search input is empty, display a message
+    resultsContainer.textContent = "Please enter a search term.";
+  }
+});
+
+		
+	
+		
+		
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
