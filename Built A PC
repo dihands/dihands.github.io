@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Building</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #444;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h3 {
+            color: #777;
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .component {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .component img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .component strong {
+            color: #555;
+            font-size: 1.2em;
+        }
+        .component a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .component a:hover {
+            text-decoration: underline;
+        }
+        .component-text {
+            flex: 1;
+            padding-right: 20px;
+        }
+        .toggle-details {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .toggle-details:hover {
+            background-color: #0056b3;
+        }
+        .details {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .details p {
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .component {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .component img {
+                margin-top: 10px;
+                max-width: 100%;
+            }
+            .component-text {
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello, Faysal. Here I built a PC for you</h1>
+        <h3>The total price will be 67700 taka</h3>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Processor, I chose the <strong><a href="https://www.startech.com.bd/amd-ryzen-5-5600-processor" target="_blank">Ryzen 5 5600</a></strong>. It will cost around 11200 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/processor/amd/5600x/5600x-001-500x500.jpg" alt="Ryzen 5 5600">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Motherboard, I chose the <strong><a href="https://www.startech.com.bd/biostar-b550mh-motherboard" target="_blank">Biostar B550MH</a></strong>. It will cost around 8500 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/motherboard/biostar/b550mh/b550mh-01-500x500.webp" alt="Biostar B550MH">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the RAM, I chose the <strong><a href="https://www.startech.com.bd/corsair-vengeance-rgb-rs-16gb-ddr4-3200mhz-ram" target="_blank">Corsair Vengeance RGB RS 16GB DDR4 3200MHz</a></strong>. It will cost around 5000 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/ram/cosair/vengeance-rgb-rs/vengeance-rgb-rs-01-500x500.jpg" alt="Corsair Vengeance RGB RS 16GB DDR4">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Storage, I chose the <strong><a href="https://www.startech.com.bd/ocpc-mfl-300-512gb-ssd" target="_blank">OCPC MFL-300 512GB m.2 NVMe SSD</a></strong>. It will cost around 5100 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/ssd/ocpc/mfl-300/mfl-300-01-500x500.webp" alt="OCPC MFL-300 512GB m.2 NVMe SSD">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Casing, I chose the <strong><a href="https://www.startech.com.bd/revenger-hawa-mid-tower-rgb-gaming-case-white" target="_blank">Revenger HAWA Mid Tower ATX RGB Gaming Case White</a></strong>. It will cost around 3500 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/casing/revenger/hawa/hawa-white-01-500x500.webp" alt="Revenger HAWA Mid Tower ATX RGB Gaming Case White">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Power Supply, I chose the <strong><a href="https://www.startech.com.bd/antec-meta-v450-power-supply" target="_blank">Antec META V450 450W Power Supply</a></strong>. It will cost around 3300 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/power-supply/antec/meta-v450/meta-v450-01-500x500.webp" alt="Antec META V450 450W Power Supply">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Monitor, I chose the <strong><a href="https://www.startech.com.bd/value-top-s22vfr100-21-5-inch-100hz-monitor" target="_blank">Value-Top S22VFR100 21.5" 100Hz FHD Monitor</a></strong>. It will cost around 9400 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/monitor/value-top/s22vfr100/s22vfr100-01-500x500.webp" alt="Value-Top S22VFR100 21.5" 100Hz FHD Monitor">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Keyboard, I chose the <strong><a href="https://www.startech.com.bd/havit-kb505l-backlit-gaming-keyboard" target="_blank">Havit KB505L Multi Function USB Backlit Gaming Keyboard</a></strong>. It will cost around 1050 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/keyboard/havit/kb505l/kb505l-500x500.jpg" alt="Havit KB505L Multi Function USB Backlit Gaming Keyboard">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Mouse, I chose the <strong><a href="https://www.startech.com.bd/imice-a7-wired-usb-gaming-mouse" target="_blank">iMICE A7 Wired USB Gaming Mouse</a></strong>. It will cost around 825 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/mouse/imice/a7-usb/a7-usb-01-500x500.jpg" alt="iMICE A7 Wired USB Gaming Mouse">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Graphics Card, I chose the <strong><a href="https://www.startech.com.bd/zotac-gaming-gtx-1650-amp-graphics-card" target="_blank">Zotac Gaming GeForce GTX 1650 AMP Core 4GB GDDR6</a></strong>. It will cost around 19400 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/graphics-card/zotac/gaming-gtx-1650-amp/gaming-gtx-1650-amp-500x500.jpg" alt="Zotac Gaming GeForce GTX 1650 AMP Core 4GB GDDR6">
+        </div>
+        <div class="component">
+            <div class="component-text">
+                <p>For the Liquid CPU Cooler, I chose the <strong><a href="https://www.startech.com.bd/antec-symphony-240-argb-cpu-cooler" target="_blank">Antec Symphony 240 ARGB All-in-One Liquid CPU Cooler</a></strong>. It will cost around 10300 taka.</p>
+            </div>
+            <img src="https://www.startech.com.bd/image/cache/catalog/cpu-cooler/antec/symphony-240/symphony-240-argb-01-500x500.jpg" alt="Antec Symphony 240 ARGB All-in-One Liquid CPU Cooler">
+        </div>
+        <div class="toggle-details" onclick="toggleDetails()">Show Details</div>
+        <div class="details">
+            <p>The total cost of building this PC will be 78000 taka, including all the components listed above. If you have any questions or need further customization, feel free to ask!</p>
+        </div>
+    </div>
+
+<script>
+    function toggleDetails() {
+        const details = document.querySelector('.details');
+        const button = document.querySelector('.toggle-details');
+        if (details.style.display === 'none' || details.style.display === '') {
+            details.style.display = 'block';
+            button.textContent = 'Hide Details';
+        } else {
+            details.style.display = 'none';
+            button.textContent = 'Show Details';
+        }
+    }
+</script>
+</body>
+</html>
