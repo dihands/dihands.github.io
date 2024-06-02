@@ -1,3 +1,6 @@
+ID = input('Enter ID : ')
+passwd = input('Enter passwd : ')
+
 import random
 
 # Define the chatbot responses
@@ -11,7 +14,7 @@ responses = {
     
     'what is the time': ['I am sorry, I do not have access to the current time.', 'I am not able to tell the time.'],
    
-    'what is your favorite color': ['I am a chatbot and do not have the ability to see colors.'],
+    'what is your favorite color': ['I am a chatbot and do not have the ability to see colors.But my chife favorite color is Dark.'],
     'how old are you': ['I am a chatbot and do not have an age.'],
     'tell me a joke': ['Why was the math book sad? Because it had too many problems.', 'What do you get when you cross a snowman and a shark? Frostbite!'],
     'what is your favorite food': ['I do not have the ability to eat, so I do not have a favorite food.'],
