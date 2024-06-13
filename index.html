@@ -1,70 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Shibpur Government Pilot Model High School</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div class="main">
-        <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">SGPMHS</h2>
-            </div>
-
-            <div class="menu">
-                <ul>
-                    <li><a href="home.html">HOME</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="service.html">SERVICE</a></li>
-                    <li><a href="contact.html">CONTACT</a></li>
-                </ul>
-            </div>
-
-            <div class="search">
-                <input class="srch" type="search" name="" placeholder="Type to search">
-                <a href="#"> <button class="btn">Search</button></a>
-            </div>
-
-        </div> 
-        <div class="content">
-            <h1>Shibpur Government Pilot Model High School<br><span>Welcome</span></h1>
-            <p class="par">Located in Shibpur, Narsingdi, Dhaka, Bangladesh.<br>We provide quality education and a nurturing environment for students.</p>
-
-            <button class="cn"><a href="#">JOIN US</a></button>
-
-            <div class="form">
-                <h2>Login Here</h2>
-                <input type="email" name="email" placeholder="Enter Email Here">
-                <input type="password" name="" placeholder="Enter Password Here">
-                <button class="btnn"><a href="#">Login</a></button>
-
-                <p class="link">Don't have an account?<br>
-                <a href="#">Sign up</a> here</p>
-                <p class="liw">Log in with</p>
-
-                <div class="icons">
-                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-google"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
-                </div>
-
-            </div>
-        </div>
+    <div class="container">
+        <form id="registrationForm" onsubmit="handleSubmit(event)">
+            <h2>User Registration</h2>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            
+            <button type="submit">Register</button>
+        </form>
     </div>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
-<style>
-    body {
-        background-image: url('img1.jpg');
-        /* Set background size and other properties as needed */
-        background-size: cover;
-        background-position: center;
-        /* Optionally, you can set a background color as a fallback */
-        background-color: #f0f0f0;
-    }
-</style>
-
