@@ -10,7 +10,7 @@ function handleSubmit(event) {
     localStorage.setItem('password', password);
     
     // Redirect to profile page
-    window.location.href = 'profil.html';
+    window.location.href = 'welcome';
 }
 
 // Display user details on profile.html
