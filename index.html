@@ -3,26 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
+    <title>Hacking Infographic</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <form id="registrationForm" onsubmit="handleSubmit(event)">
-            <h2>User Registration</h2>
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" name="fullName" required><br><br>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-            
-            <button type="submit">Register</button>
-        </form>
+        <header>
+            <h1>Understanding Hacking</h1>
+            <p>An infographic about hacking</p>
+        </header>
+        <section id="types-of-hacking">
+            <h2>Types of Hacking</h2>
+            <div class="card">
+                <h3>Phishing</h3>
+                <p>Deceptive emails designed to steal your information.</p>
+            </div>
+            <div class="card">
+                <h3>Malware</h3>
+                <p>Software designed to disrupt, damage, or gain unauthorized access to systems.</p>
+            </div>
+            <div class="card">
+                <h3>SQL Injection</h3>
+                <p>Exploiting vulnerabilities in SQL databases.</p>
+            </div>
+        </section>
+        <section id="famous-hacks">
+            <h2>Famous Hacking Incidents</h2>
+            <div class="incident" onclick="toggleDetails('incident1-details')">
+                <h3>Target Data Breach</h3>
+                <div id="incident1-details" class="details">
+                    <p>In 2013, hackers stole 40 million credit and debit card records from Target.</p>
+                </div>
+            </div>
+            <div class="incident" onclick="toggleDetails('incident2-details')">
+                <h3>Yahoo Data Breach</h3>
+                <div id="incident2-details" class="details">
+                    <p>In 2014, a breach affected 500 million Yahoo accounts.</p>
+                </div>
+            </div>
+        </section>
+        <section id="protection-tips">
+            <h2>Protection Tips</h2>
+            <ul>
+                <li>Use strong, unique passwords.</li>
+                <li>Enable two-factor authentication.</li>
+                <li>Be cautious of suspicious emails and links.</li>
+            </ul>
+        </section>
+        <footer>
+            <p>Stay safe online!</p>
+        </footer>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
+
+<style>
+
+
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    header {
+        text-align: center;
+        padding: 20px;
+    }
+    
+    header h1 {
+        margin: 0;
+        color: #333;
+    }
+    
+    header p {
+        color: #666;
+    }
+    
+    section {
+        margin: 20px 0;
+    }
+    
+    section h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+        color: #333;
+    }
+    
+    .card, .incident {
+        background: #fff;
+        padding: 20px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+    
+    .card:hover, .incident:hover {
+        transform: scale(1.05);
+    }
+    
+    .details {
+        display: none;
+    }
+    
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #333;
+        color: #fff;
+    }
+    
+</style>
+
+<script>
+
+    function toggleDetails(id) {
+        const details = document.getElementById(id);
+        if (details.style.display === "none" || details.style.display === "") {
+            details.style.display = "block";
+        } else {
+            details.style.display = "none";
+        }
+    }
+    
+</script>
