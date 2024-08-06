@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Encoder</title>
+    <script type="text/javascript">
+        // Define the mapping dictionary for encoding
+        const encodingMapping = {
+            'a': '~',
+            '$': 'b',
+            '#': 'c',
+            '%': 'd',
+            '*': 'e',
+            '@': 'f', 
+            '_': 'g',
+            '+': 'h',
+            '-': 'i',
+            '!': 'j',
+            '/': 'k',
+            ';': 'l',
+            "'": 'm',
+            '"': 'n',
+            '(': 'o',
+            '^': 'p',
+            '`': 'q',
+            '?': 'r',
+            ',': 's',
+            ':': 't',
+            '7': 'u',
+            '3': 'v',
+            '1': 'w',
+            '0': 'x',
+            '9': 'y',
+            '5': 'z',
+            'a': '~',
+            'b': '$',
+            'c': '#',
+            'd': '%',
+            'e': '*',
+            'f': '@',  
+            'g': '_',
+            'h': '+',
+            'i': '-',
+            'j': '!',
+            'k': '/',
+            'l': ';',
+            'm': "'",
+            'n': '"',
+            'o': '(',
+            'p': '^',
+            'q': '`',
+            'r': '?',
+            's': ',',
+            't': ':',
+            'u': '7',
+            'v': '3',
+            'w': '1',
+            'x': '0',
+            'y': '9',
+            'z': '5'
+        };
+
+        // Function to encode the plain message
+        function encodeMessage() {
+            let plainMessage = document.getElementById("plainMessage").value.toLowerCase();
+            let encodedMessage = '';
+            for (let char of plainMessage) {
+                encodedMessage += encodingMapping[char] || char; // default to char if not found in the dictionary
+            }
+            document.getElementById("encodedMessage").innerText = encodedMessage;
+            sendMessage(encodedMessage);
+        }
+
+        // Function to send the encoded message to the server
+        function sendMessage(message) {
+            fetch('http://localhost:5000/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                getMessages();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Function to get messages from the server
+        function getMessages() {
+            fetch('http://localhost:5000/messages')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("allMessages").innerText = data.join('\n');
+            });
+        }
+
+        // Refresh messages every 5 seconds
+        setInterval(getMessages, 5000);
+    </script>
+</head>
+<body onload="getMessages()">
+    <h1>Message Encoder</h1>
+    <textarea id="plainMessage" rows="4" cols="50" placeholder="Type your message here..."></textarea><br>
+    <button onclick="encodeMessage()">Encode and Send Message</button>
+    <p><strong>Encoded Message:</strong></p>
+    <p id="encodedMessage"></p>
+    <h2>All Messages:</h2>
+    <pre id="allMessages"></pre>
+</body>
+</html>
